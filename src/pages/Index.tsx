@@ -15,13 +15,13 @@ const Index = () => {
   const { toast } = useToast();
   
   // State management
-  const [lists, setLists] = useLocalStorage<List[]>('taskflow-lists', mockLists);
-  const [allTasks, setAllTasks] = useLocalStorage<Task[]>('taskflow-tasks', mockTasks);
+  const [lists, setLists] = useLocalStorage<List[]>('cloudlist-lists', mockLists);
+  const [allTasks, setAllTasks] = useLocalStorage<Task[]>('cloudlist-tasks', mockTasks);
   const [selectedListId, setSelectedListId] = useState<string | null>(lists[0]?.id || null);
   const [viewMode, setViewMode] = useState<ViewMode>('single');
   const [settingsOpen, setSettingsOpen] = useState(false);
   
-  const [settings, setSettings] = useLocalStorage<Settings>('taskflow-settings', {
+  const [settings, setSettings] = useLocalStorage<Settings>('cloudlist-settings', {
     backgroundScene: 'day',
     taskCompletionStyle: 'strikethrough',
     animationsEnabled: true,
@@ -75,6 +75,36 @@ const Index = () => {
     toast({
       title: "List updated",
       description: "Your changes have been saved",
+      duration: 2000,
+    });
+  };
+
+  const handleDeleteList = (listId: string) => {
+    const listToDelete = lists.find(list => list.id === listId);
+    
+    if (!listToDelete) return;
+    
+    // Remove the list
+    setLists(prevLists => prevLists.filter(list => list.id !== listId));
+    
+    // Remove all tasks associated with this list
+    setAllTasks(prevTasks => prevTasks.filter(task => task.listId !== listId));
+    
+    // Handle list selection after deletion
+    if (selectedListId === listId) {
+      const remainingLists = lists.filter(list => list.id !== listId);
+      if (remainingLists.length > 0) {
+        setSelectedListId(remainingLists[0].id);
+        setViewMode('single');
+      } else {
+        setSelectedListId(null);
+        setViewMode('single');
+      }
+    }
+    
+    toast({
+      title: "List deleted",
+      description: listToDelete.name,
       duration: 2000,
     });
   };
@@ -174,6 +204,7 @@ const Index = () => {
             onViewAllLists={handleViewAllLists}
             onAddList={handleAddList}
             onEditList={handleEditList}
+            onDeleteList={handleDeleteList}
           />
           
           <MainContent
@@ -187,6 +218,7 @@ const Index = () => {
             onEditTask={handleEditTask}
             onAddTask={handleAddTask}
             onEditList={handleEditList}
+            onDeleteList={handleDeleteList}
             onOpenSettings={() => setSettingsOpen(true)}
           />
         </div>

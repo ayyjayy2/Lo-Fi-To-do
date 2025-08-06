@@ -2,35 +2,54 @@
 import { List } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Circle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { CheckCircle, Circle, Trash2 } from 'lucide-react';
 import { EditableTitle } from './EditableTitle';
 
 interface ListCardProps {
   list: List;
   onClick: () => void;
   onEditTitle: (newTitle: string) => void;
+  onDelete: () => void;
 }
 
-export const ListCard = ({ list, onClick, onEditTitle }: ListCardProps) => {
+export const ListCard = ({ list, onClick, onEditTitle, onDelete }: ListCardProps) => {
   const completedTasks = list.tasks.filter(task => task.completed).length;
   const totalTasks = list.tasks.length;
   const completionPercent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
   const handleCardClick = (e: React.MouseEvent) => {
-    // Don't trigger onClick if clicking on the editable title
-    if ((e.target as HTMLElement).closest('.editable-title')) {
+    // Don't trigger onClick if clicking on the editable title or delete button
+    if ((e.target as HTMLElement).closest('.editable-title') || 
+        (e.target as HTMLElement).closest('.delete-button')) {
       return;
     }
     onClick();
   };
 
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (window.confirm(`Are you sure you want to delete the list "${list.name}"?`)) {
+      onDelete();
+    }
+  };
+
   return (
     <Card 
-      className="cursor-pointer bg-card/60 backdrop-blur-sm border-border/50 hover:bg-card/80 hover:shadow-soft transition-all duration-300 hover:scale-105 animate-fade-in group"
+      className="cursor-pointer bg-card/60 backdrop-blur-sm border-border/50 hover:bg-card/80 hover:shadow-soft transition-all duration-300 hover:scale-105 animate-fade-in group relative"
       onClick={handleCardClick}
     >
+      <Button
+        variant="ghost"
+        size="icon"
+        className="delete-button absolute top-2 right-2 h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/20 hover:text-destructive z-10"
+        onClick={handleDelete}
+      >
+        <Trash2 className="h-3 w-3" />
+      </Button>
+
       <CardHeader className="pb-3">
-        <CardTitle className="text-lg font-medium text-foreground flex items-center justify-between">
+        <CardTitle className="text-lg font-medium text-foreground flex items-center justify-between pr-8">
           <div className="editable-title flex-1 mr-2">
             <EditableTitle
               title={list.name}

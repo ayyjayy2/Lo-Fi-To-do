@@ -17,6 +17,7 @@ interface MainContentProps {
   onEditTask: (taskId: string, newName: string) => void;
   onAddTask: (taskName: string, listId: string) => void;
   onEditList: (listId: string, newName: string) => void;
+  onDeleteList: (listId: string) => void;
   onOpenSettings: () => void;
 }
 
@@ -31,6 +32,7 @@ export const MainContent = ({
   onEditTask,
   onAddTask,
   onEditList,
+  onDeleteList,
   onOpenSettings,
 }: MainContentProps) => {
   if (viewMode === 'all') {
@@ -58,6 +60,7 @@ export const MainContent = ({
               list={list}
               onClick={() => onSelectList(list.id)}
               onEditTitle={(newTitle) => onEditList(list.id, newTitle)}
+              onDelete={() => onDeleteList(list.id)}
             />
           ))}
         </div>
@@ -80,7 +83,7 @@ export const MainContent = ({
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <SidebarTrigger />
-            <h1 className="text-2xl font-bold text-foreground">Welcome to TaskFlow</h1>
+            <h1 className="text-2xl font-bold text-foreground">Welcome to Cloudlist</h1>
           </div>
           <Button
             variant="outline"

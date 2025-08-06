@@ -12,7 +12,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { LayoutGrid, List as ListIcon, Sparkles, Grid3X3 } from 'lucide-react';
+import { LayoutGrid, List as ListIcon, Sparkles, Grid3X3, Trash2 } from 'lucide-react';
 import { EditableTitle } from './EditableTitle';
 import { NewListInput } from './NewListInput';
 
@@ -24,6 +24,7 @@ interface AppSidebarProps {
   onViewAllLists: () => void;
   onAddList: (name: string) => void;
   onEditList: (listId: string, newName: string) => void;
+  onDeleteList: (listId: string) => void;
 }
 
 export const AppSidebar = ({
@@ -34,6 +35,7 @@ export const AppSidebar = ({
   onViewAllLists,
   onAddList,
   onEditList,
+  onDeleteList,
 }: AppSidebarProps) => {
   const { state } = useSidebar();
   const collapsed = state === 'collapsed';
@@ -51,6 +53,12 @@ export const AppSidebar = ({
     }
   };
 
+  const handleDeleteList = (listId: string, listName: string) => {
+    if (window.confirm(`Are you sure you want to delete the list "${listName}"?`)) {
+      onDeleteList(listId);
+    }
+  };
+
   return (
     <Sidebar className={`${collapsed ? 'w-14' : 'w-64'} bg-card/60 backdrop-blur-md border-border/50`}>
       <SidebarContent>
@@ -61,7 +69,7 @@ export const AppSidebar = ({
               <Sparkles className="h-5 w-5 text-primary-foreground" />
             </div>
             {!collapsed && (
-              <span className="font-semibold text-foreground">TaskFlow</span>
+              <span className="font-semibold text-foreground">Cloudlist</span>
             )}
           </div>
         </div>
@@ -79,10 +87,10 @@ export const AppSidebar = ({
                 const isSelected = selectedListId === list.id && viewMode === 'single';
                 
                 return (
-                  <SidebarMenuItem key={list.id}>
+                  <SidebarMenuItem key={list.id} className="group relative">
                     <SidebarMenuButton
                       onClick={() => onSelectList(list.id)}
-                      className={`w-full justify-start ${
+                      className={`w-full justify-start pr-8 ${
                         isSelected 
                           ? 'bg-primary/10 text-primary border-r-2 border-primary' 
                           : 'hover:bg-muted/50'
@@ -102,6 +110,19 @@ export const AppSidebar = ({
                         </div>
                       )}
                     </SidebarMenuButton>
+                    {!collapsed && lists.length > 1 && (
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="absolute top-1 right-1 h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/20 hover:text-destructive"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteList(list.id, list.name);
+                        }}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    )}
                   </SidebarMenuItem>
                 );
               })}
