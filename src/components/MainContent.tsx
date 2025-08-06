@@ -1,3 +1,4 @@
+
 import { List, Task, Settings, ViewMode } from '@/types';
 import { TaskList } from './TaskList';
 import { ListCard } from './ListCard';
@@ -15,6 +16,7 @@ interface MainContentProps {
   onDeleteTask: (taskId: string) => void;
   onEditTask: (taskId: string, newName: string) => void;
   onAddTask: (taskName: string, listId: string) => void;
+  onEditList: (listId: string, newName: string) => void;
   onOpenSettings: () => void;
 }
 
@@ -28,6 +30,7 @@ export const MainContent = ({
   onDeleteTask,
   onEditTask,
   onAddTask,
+  onEditList,
   onOpenSettings,
 }: MainContentProps) => {
   if (viewMode === 'all') {
@@ -54,6 +57,7 @@ export const MainContent = ({
               key={list.id}
               list={list}
               onClick={() => onSelectList(list.id)}
+              onEditTitle={(newTitle) => onEditList(list.id, newTitle)}
             />
           ))}
         </div>
