@@ -1,3 +1,4 @@
+
 import { Settings } from '@/types';
 import {
   Dialog,
@@ -25,10 +26,10 @@ export const SettingsDialog = ({
   onSettingsChange,
 }: SettingsDialogProps) => {
   const backgroundOptions = [
-    { id: 'lofi', name: 'Lo-Fi Cafe', preview: '🎵' },
-    { id: 'nature', name: 'Forest Calm', preview: '🌲' },
-    { id: 'space', name: 'Cosmic Dreams', preview: '🌌' },
-    { id: 'ocean', name: 'Ocean Waves', preview: '🌊' },
+    { id: 'day', name: 'Sunny Day', preview: '☀️' },
+    { id: 'night', name: 'Starry Night', preview: '🌙' },
+    { id: 'raining', name: 'Gentle Rain', preview: '🌧️' },
+    { id: 'cats', name: 'Kawaii Cats', preview: '🐱' },
   ];
 
   return (

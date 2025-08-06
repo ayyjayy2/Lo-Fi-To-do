@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { List, Task, Settings, ViewMode } from '@/types';
 import { mockLists, mockTasks } from '@/data/mockData';
@@ -21,7 +22,7 @@ const Index = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   
   const [settings, setSettings] = useLocalStorage<Settings>('taskflow-settings', {
-    backgroundScene: 'lofi',
+    backgroundScene: 'day',
     taskCompletionStyle: 'strikethrough',
     animationsEnabled: true,
   });
@@ -43,6 +44,39 @@ const Index = () => {
   const handleViewAllLists = () => {
     setViewMode('all');
     setSelectedListId(null);
+  };
+
+  const handleAddList = (name: string) => {
+    const newList: List = {
+      id: Date.now().toString(),
+      name,
+      createdDate: new Date(),
+      tasks: [],
+    };
+    
+    setLists(prevLists => [...prevLists, newList]);
+    setSelectedListId(newList.id);
+    setViewMode('single');
+    
+    toast({
+      title: "List created! 🎉",
+      description: name,
+      duration: 2000,
+    });
+  };
+
+  const handleEditList = (listId: string, newName: string) => {
+    setLists(prevLists =>
+      prevLists.map(list =>
+        list.id === listId ? { ...list, name: newName } : list
+      )
+    );
+    
+    toast({
+      title: "List updated",
+      description: "Your changes have been saved",
+      duration: 2000,
+    });
   };
 
   const handleToggleTask = (taskId: string) => {
@@ -138,6 +172,8 @@ const Index = () => {
             viewMode={viewMode}
             onSelectList={handleSelectList}
             onViewAllLists={handleViewAllLists}
+            onAddList={handleAddList}
+            onEditList={handleEditList}
           />
           
           <MainContent
@@ -150,6 +186,7 @@ const Index = () => {
             onDeleteTask={handleDeleteTask}
             onEditTask={handleEditTask}
             onAddTask={handleAddTask}
+            onEditList={handleEditList}
             onOpenSettings={() => setSettingsOpen(true)}
           />
         </div>

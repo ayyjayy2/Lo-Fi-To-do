@@ -1,3 +1,4 @@
+
 export interface Task {
   id: string;
   name: string;
@@ -20,3 +21,10 @@ export interface Settings {
 }
 
 export type ViewMode = 'single' | 'all';
+
+export interface BackgroundScene {
+  id: string;
+  name: string;
+  preview: string;
+  isDefault?: boolean;
+}
