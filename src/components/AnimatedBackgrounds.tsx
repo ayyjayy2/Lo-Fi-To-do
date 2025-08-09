@@ -147,36 +147,113 @@ export const AnimatedBackgrounds = ({
 
   const renderCatsScene = () => (
     <div className="absolute inset-0 bg-gradient-to-b from-pink-200 via-purple-100 to-rose-100">
-      {/* Kawaii Cat 1 */}
+      {/* Kawaii Cat 1 - Orange Tabby (sitting) */}
       <div className="absolute bottom-32 left-20 relative">
-        <div className="w-10 h-8 bg-orange-200 rounded-2xl relative border-2 border-orange-300/50">
-          <div className="absolute -top-2 left-2 w-2 h-3 bg-orange-200 rounded-full border border-orange-300/50" />
-          <div className="absolute -top-2 right-2 w-2 h-3 bg-orange-200 rounded-full border border-orange-300/50" />
-          <div className="absolute top-2 left-2.5 w-2 h-2 bg-black rounded-full" />
-          <div className="absolute top-2 right-2.5 w-2 h-2 bg-black rounded-full" />
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-pink-400 rounded-full" />
-          <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-2 h-1 bg-pink-300 rounded-full" />
-          <div className="absolute -right-6 top-3 w-8 h-1 bg-orange-200 rounded-full animate-bounce border border-orange-300/50" 
+        <div className="w-14 h-12 bg-orange-200 rounded-3xl relative border-2 border-orange-300/50 shadow-lg">
+          {/* Ears */}
+          <div className="absolute -top-3 left-3 w-3 h-4 bg-orange-200 rounded-full border border-orange-300/50" />
+          <div className="absolute -top-3 right-3 w-3 h-4 bg-orange-200 rounded-full border border-orange-300/50" />
+          <div className="absolute -top-2 left-4 w-1.5 h-2 bg-pink-300 rounded-full" />
+          <div className="absolute -top-2 right-4 w-1.5 h-2 bg-pink-300 rounded-full" />
+          {/* Eyes */}
+          <div className="absolute top-3 left-3 w-3 h-3 bg-black rounded-full" />
+          <div className="absolute top-3 right-3 w-3 h-3 bg-black rounded-full" />
+          <div className="absolute top-3.5 left-3.5 w-1.5 h-1.5 bg-white rounded-full" />
+          <div className="absolute top-3.5 right-3.5 w-1.5 h-1.5 bg-white rounded-full" />
+          {/* Nose and mouth */}
+          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-1.5 h-1 bg-pink-400 rounded-full" />
+          <div className="absolute top-7 left-1/2 transform -translate-x-1/2 w-3 h-1 bg-pink-300 rounded-full" />
+          {/* Whiskers */}
+          <div className="absolute top-6 left-1 w-4 h-0.5 bg-black/30 rounded-full" />
+          <div className="absolute top-6 right-1 w-4 h-0.5 bg-black/30 rounded-full" />
+          {/* Tail */}
+          <div className="absolute -right-8 top-4 w-10 h-1.5 bg-orange-200 rounded-full animate-bounce border border-orange-300/50" 
                style={{ animationDelay: '1s', animationDuration: '3s' }} />
         </div>
       </div>
       
-      {/* Kawaii Cat 2 */}
+      {/* Kawaii Cat 2 - White (sleeping) */}
       <div className="absolute bottom-28 right-32 relative">
-        <div className="w-12 h-10 bg-gray-200 rounded-2xl relative border-2 border-gray-300/50">
-          <div className="absolute -top-2 left-3 w-2 h-3 bg-gray-200 rounded-full border border-gray-300/50" />
-          <div className="absolute -top-2 right-3 w-2 h-3 bg-gray-200 rounded-full border border-gray-300/50" />
-          <div className="absolute top-3 left-3 w-2 h-2 bg-black rounded-full" />
-          <div className="absolute top-3 right-3 w-2 h-2 bg-black rounded-full" />
+        <div className="w-16 h-10 bg-white rounded-3xl relative border-2 border-gray-200/50 shadow-lg transform rotate-12">
+          {/* Ears */}
+          <div className="absolute -top-2 left-4 w-3 h-3 bg-white rounded-full border border-gray-200/50" />
+          <div className="absolute -top-2 right-4 w-3 h-3 bg-white rounded-full border border-gray-200/50" />
+          {/* Closed eyes */}
+          <div className="absolute top-3 left-4 w-2 h-1 bg-black rounded-full" />
+          <div className="absolute top-3 right-4 w-2 h-1 bg-black rounded-full" />
+          {/* Nose */}
           <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-pink-400 rounded-full" />
-          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-3 h-1 bg-pink-300 rounded-full" />
-          <div className="absolute -right-7 top-4 w-10 h-1 bg-gray-200 rounded-full animate-bounce border border-gray-300/50" 
-               style={{ animationDelay: '2s', animationDuration: '4s' }} />
+          {/* Content smile */}
+          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-2 h-0.5 bg-pink-300 rounded-full" />
+          {/* Tail curled */}
+          <div className="absolute -right-6 top-3 w-8 h-1 bg-white rounded-full border border-gray-200/50" />
         </div>
       </div>
       
-      {/* Floating hearts */}
-      {animationsEnabled && [...Array(12)].map((_, i) => (
+      {/* Kawaii Cat 3 - Gray (stretching) */}
+      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 relative">
+        <div className="w-12 h-8 bg-gray-300 rounded-3xl relative border-2 border-gray-400/50 shadow-lg transform -rotate-6">
+          {/* Ears */}
+          <div className="absolute -top-2 left-2 w-2.5 h-3 bg-gray-300 rounded-full border border-gray-400/50" />
+          <div className="absolute -top-2 right-2 w-2.5 h-3 bg-gray-300 rounded-full border border-gray-400/50" />
+          {/* Eyes */}
+          <div className="absolute top-2 left-2.5 w-2.5 h-2.5 bg-black rounded-full" />
+          <div className="absolute top-2 right-2.5 w-2.5 h-2.5 bg-black rounded-full" />
+          <div className="absolute top-2.5 left-3 w-1 h-1 bg-white rounded-full" />
+          <div className="absolute top-2.5 right-3 w-1 h-1 bg-white rounded-full" />
+          {/* Stretched body */}
+          <div className="absolute -right-6 top-1 w-8 h-4 bg-gray-300 rounded-2xl border border-gray-400/50" />
+          {/* Paws */}
+          <div className="absolute -right-3 top-4 w-2 h-2 bg-gray-300 rounded-full border border-gray-400/50" />
+          <div className="absolute -right-1 top-4 w-2 h-2 bg-gray-300 rounded-full border border-gray-400/50" />
+        </div>
+      </div>
+
+      {/* Kawaii Cat 4 - Calico (sitting pretty) */}
+      <div className="absolute bottom-36 left-1/3 relative">
+        <div className="w-12 h-10 bg-white rounded-3xl relative border-2 border-orange-200/50 shadow-lg">
+          {/* Calico patches */}
+          <div className="absolute top-0 left-1 w-4 h-3 bg-orange-200 rounded-2xl" />
+          <div className="absolute top-2 right-1 w-3 h-2 bg-gray-300 rounded-xl" />
+          {/* Ears */}
+          <div className="absolute -top-2 left-3 w-2.5 h-3 bg-white rounded-full border border-orange-200/50" />
+          <div className="absolute -top-2 right-3 w-2.5 h-3 bg-orange-200 rounded-full border border-orange-200/50" />
+          {/* Eyes */}
+          <div className="absolute top-3 left-3 w-2.5 h-2.5 bg-black rounded-full" />
+          <div className="absolute top-3 right-3 w-2.5 h-2.5 bg-black rounded-full" />
+          <div className="absolute top-3.5 left-3.5 w-1 h-1 bg-white rounded-full" />
+          <div className="absolute top-3.5 right-3.5 w-1 h-1 bg-white rounded-full" />
+          {/* Blush */}
+          <div className="absolute top-5 left-1 w-2 h-1 bg-pink-300/60 rounded-full" />
+          <div className="absolute top-5 right-1 w-2 h-1 bg-pink-300/60 rounded-full" />
+          {/* Tail with ear twitch animation */}
+          <div className="absolute -right-6 top-2 w-8 h-1 bg-white rounded-full border border-orange-200/50 animate-pulse" />
+        </div>
+      </div>
+
+      {/* Kawaii Cat 5 - Black (playing) */}
+      <div className="absolute bottom-30 right-1/4 relative">
+        <div className="w-10 h-8 bg-gray-800 rounded-3xl relative border-2 border-gray-700/50 shadow-lg transform rotate-6">
+          {/* Ears with twitch */}
+          <div className="absolute -top-2 left-2 w-2 h-3 bg-gray-800 rounded-full border border-gray-700/50 animate-pulse" 
+               style={{ animationDelay: '0.5s' }} />
+          <div className="absolute -top-2 right-2 w-2 h-3 bg-gray-800 rounded-full border border-gray-700/50" />
+          {/* Green eyes */}
+          <div className="absolute top-2 left-2 w-2 h-2 bg-green-400 rounded-full" />
+          <div className="absolute top-2 right-2 w-2 h-2 bg-green-400 rounded-full" />
+          <div className="absolute top-2.5 left-2.5 w-0.5 h-1 bg-black rounded-full" />
+          <div className="absolute top-2.5 right-2.5 w-0.5 h-1 bg-black rounded-full" />
+          {/* Playful expression */}
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-pink-400 rounded-full" />
+          <div className="absolute top-5 left-1/2 transform -translate-x-1/2 w-2 h-0.5 bg-pink-300 rounded-full transform rotate-12" />
+          {/* Swaying tail */}
+          <div className="absolute -right-5 top-1 w-6 h-1 bg-gray-800 rounded-full border border-gray-700/50 animate-bounce" 
+               style={{ animationDelay: '1.5s', animationDuration: '2s' }} />
+        </div>
+      </div>
+      
+      {/* Floating hearts and sparkles */}
+      {animationsEnabled && [...Array(8)].map((_, i) => (
         <div
           key={i}
           className="absolute text-pink-400 text-lg animate-float"
@@ -186,15 +263,33 @@ export const AnimatedBackgrounds = ({
             animationDelay: `${Math.random() * 3}s`,
           }}
         >
-          ♡
+          {i % 2 === 0 ? '♡' : '✨'}
         </div>
       ))}
       
-      {/* Soft floor/desk elements */}
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-purple-200/60 via-pink-100/40 to-transparent" />
-      <div className="absolute bottom-8 left-24 text-pink-400 text-2xl animate-bounce" style={{ animationDelay: '1s' }}>🌸</div>
-      <div className="absolute bottom-12 right-28 text-yellow-400 text-xl animate-bounce" style={{ animationDelay: '3s' }}>🌻</div>
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-purple-400 text-lg animate-bounce" style={{ animationDelay: '2s' }}>✨</div>
+      {/* Cozy indoor elements - books, desk, plants */}
+      <div className="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-t from-purple-200/60 via-pink-100/40 to-transparent" />
+      
+      {/* Stack of books */}
+      <div className="absolute bottom-8 left-16">
+        <div className="w-8 h-2 bg-blue-300 rounded border border-blue-400/50" />
+        <div className="w-8 h-2 bg-green-300 rounded border border-green-400/50 transform -translate-y-0.5" />
+        <div className="w-8 h-2 bg-yellow-300 rounded border border-yellow-400/50 transform -translate-y-1" />
+      </div>
+      
+      {/* Small plant */}
+      <div className="absolute bottom-12 right-20">
+        <div className="w-4 h-6 bg-green-400 rounded-full" />
+        <div className="absolute top-2 left-1 w-2 h-3 bg-green-300 rounded-full" />
+        <div className="absolute top-2 right-1 w-2 h-3 bg-green-300 rounded-full" />
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-2 bg-terracotta rounded-b-lg" />
+      </div>
+      
+      {/* Cozy blanket corner */}
+      <div className="absolute bottom-4 left-1/3 w-16 h-6 bg-lavender/60 rounded-xl border border-lavender transform rotate-12" />
+      
+      {/* Decorative elements */}
+      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-purple-400 text-lg animate-bounce" style={{ animationDelay: '2s' }}>✨</div>
     </div>
   );
 
@@ -229,7 +324,7 @@ export const AnimatedBackgrounds = ({
       <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/50 to-background/70" />
       
       {/* CSS for sliding rain animation */}
-      <style jsx>{`
+      <style>{`
         @keyframes slideDown {
           from {
             transform: translateY(-100vh);

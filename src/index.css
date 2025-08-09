@@ -8,9 +8,20 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Boho-inspired color palette */
-    --background: 35 25% 97%;
-    --foreground: 25 15% 15%;
+    /* Kawaii Color Palette */
+    --sky-blue: 195 100% 85%;
+    --pastel-mint: 169 68% 82%;
+    --peach-pink: 349 100% 91%;
+    --lavender: 260 100% 89%;
+    --cloud-white: 0 0% 98%;
+    --soft-gray: 0 0% 91%;
+    --charcoal-gray: 0 0% 31%;
+    --blush-pink: 351 100% 86%;
+    --soft-gold: 45 100% 80%;
+    
+    /* Updated color system using kawaii palette */
+    --background: var(--cloud-white);
+    --foreground: var(--charcoal-gray);
 
     --card: 35 40% 96%;
     --card-foreground: 25 15% 20%;
@@ -18,17 +29,17 @@ All colors MUST be HSL.
     --popover: 35 40% 98%;
     --popover-foreground: 25 15% 15%;
 
-    --primary: 28 65% 70%;
-    --primary-foreground: 35 25% 97%;
+    --primary: var(--sky-blue);
+    --primary-foreground: var(--charcoal-gray);
 
-    --secondary: 42 38% 85%;
-    --secondary-foreground: 25 25% 25%;
+    --secondary: var(--peach-pink);
+    --secondary-foreground: var(--charcoal-gray);
 
     --muted: 35 20% 92%;
     --muted-foreground: 25 15% 45%;
 
-    --accent: 320 25% 75%;
-    --accent-foreground: 25 25% 15%;
+    --accent: var(--pastel-mint);
+    --accent-foreground: var(--charcoal-gray);
 
     --destructive: 350 65% 65%;
     --destructive-foreground: 35 25% 97%;
@@ -147,6 +158,6 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-quicksand;
   }
 }

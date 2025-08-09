@@ -1,10 +1,12 @@
 
+import { useState } from 'react';
 import { List } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, Circle, Trash2 } from 'lucide-react';
 import { EditableTitle } from './EditableTitle';
+import { KawaiiDeleteDialog } from './KawaiiDeleteDialog';
 
 interface ListCardProps {
   list: List;
@@ -14,6 +16,7 @@ interface ListCardProps {
 }
 
 export const ListCard = ({ list, onClick, onEditTitle, onDelete }: ListCardProps) => {
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const completedTasks = list.tasks.filter(task => task.completed).length;
   const totalTasks = list.tasks.length;
   const completionPercent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
@@ -29,9 +32,12 @@ export const ListCard = ({ list, onClick, onEditTitle, onDelete }: ListCardProps
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (window.confirm(`Are you sure you want to delete the list "${list.name}"?`)) {
-      onDelete();
-    }
+    setShowDeleteDialog(true);
+  };
+
+  const handleConfirmDelete = () => {
+    onDelete();
+    setShowDeleteDialog(false);
   };
 
   return (
@@ -98,6 +104,13 @@ export const ListCard = ({ list, onClick, onEditTitle, onDelete }: ListCardProps
           )}
         </div>
       </CardContent>
+      
+      <KawaiiDeleteDialog
+        open={showDeleteDialog}
+        onOpenChange={setShowDeleteDialog}
+        onConfirm={handleConfirmDelete}
+        listName={list.name}
+      />
     </Card>
   );
 };

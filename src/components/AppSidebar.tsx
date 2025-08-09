@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import { List, ViewMode } from '@/types';
 import {
   Sidebar,
@@ -15,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import { LayoutGrid, List as ListIcon, Sparkles, Grid3X3, Trash2 } from 'lucide-react';
 import { EditableTitle } from './EditableTitle';
 import { NewListInput } from './NewListInput';
+import { KawaiiDeleteDialog } from './KawaiiDeleteDialog';
 
 interface AppSidebarProps {
   lists: List[];
@@ -39,6 +41,11 @@ export const AppSidebar = ({
 }: AppSidebarProps) => {
   const { state } = useSidebar();
   const collapsed = state === 'collapsed';
+  const [deleteDialog, setDeleteDialog] = useState<{open: boolean, listId: string, listName: string}>({
+    open: false,
+    listId: '',
+    listName: ''
+  });
 
   const handleToggleView = () => {
     if (viewMode === 'all') {
@@ -54,9 +61,16 @@ export const AppSidebar = ({
   };
 
   const handleDeleteList = (listId: string, listName: string) => {
-    if (window.confirm(`Are you sure you want to delete the list "${listName}"?`)) {
-      onDeleteList(listId);
-    }
+    setDeleteDialog({
+      open: true,
+      listId,
+      listName
+    });
+  };
+
+  const handleConfirmDelete = () => {
+    onDeleteList(deleteDialog.listId);
+    setDeleteDialog({open: false, listId: '', listName: ''});
   };
 
   return (
@@ -163,6 +177,13 @@ export const AppSidebar = ({
           </Button>
         </div>
       </SidebarContent>
+      
+      <KawaiiDeleteDialog
+        open={deleteDialog.open}
+        onOpenChange={(open) => setDeleteDialog(prev => ({...prev, open}))}
+        onConfirm={handleConfirmDelete}
+        listName={deleteDialog.listName}
+      />
     </Sidebar>
   );
 };

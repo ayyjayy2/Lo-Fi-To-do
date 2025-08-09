@@ -18,6 +18,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'quicksand': ['Quicksand', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -78,7 +81,17 @@ export default {
 				'dusty-rose': {
 					DEFAULT: 'hsl(var(--dusty-rose))',
 					foreground: 'hsl(var(--dusty-rose-foreground))'
-				}
+				},
+				/* Kawaii Color Extensions */
+				'sky-blue': 'hsl(var(--sky-blue))',
+				'pastel-mint': 'hsl(var(--pastel-mint))',
+				'peach-pink': 'hsl(var(--peach-pink))',
+				'lavender': 'hsl(var(--lavender))',
+				'cloud-white': 'hsl(var(--cloud-white))',
+				'soft-gray': 'hsl(var(--soft-gray))',
+				'charcoal-gray': 'hsl(var(--charcoal-gray))',
+				'blush-pink': 'hsl(var(--blush-pink))',
+				'soft-gold': 'hsl(var(--soft-gold))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
