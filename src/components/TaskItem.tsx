@@ -17,6 +17,10 @@ export const TaskItem = ({ task, settings, onToggle, onDelete, onEdit, dragHandl
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(task.name);
 
+  // DnD handle props (avoid referencing possibly undefined object directly in JSX)
+  const dragAttributes = dragHandle?.attributes;
+  const dragListeners = dragHandle?.listeners;
+
   const handleSaveEdit = () => {
     if (editValue.trim()) {
       onEdit(task.id, editValue.trim());
@@ -81,8 +85,8 @@ export const TaskItem = ({ task, settings, onToggle, onDelete, onEdit, dragHandl
             size="sm"
             aria-label="Reorder task"
             className="h-8 w-8 p-0 cursor-grab active:cursor-grabbing hover:bg-muted"
-            {...dragHandle.attributes}
-            {...dragHandle.listeners}
+            {...dragAttributes}
+            {...dragListeners}
           >
             <GripVertical className="h-3 w-3" />
           </Button>
