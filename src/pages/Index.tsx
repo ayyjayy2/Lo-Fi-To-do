@@ -28,10 +28,21 @@ const Index = () => {
   });
 
   // Update lists with current tasks
-  const listsWithTasks = lists.map(list => ({
-    ...list,
-    tasks: allTasks.filter(task => task.listId === list.id),
-  }));
+  const listsWithTasks = lists.map(list => {
+    const tasksForList = allTasks.filter(task => task.listId === list.id);
+    const sortedTasks = [...tasksForList].sort((a, b) => {
+      const ao = a.order;
+      const bo = b.order;
+      if (ao != null && bo != null) return ao - bo;
+      if (ao != null) return -1;
+      if (bo != null) return 1;
+      return allTasks.indexOf(a) - allTasks.indexOf(b);
+    });
+    return {
+      ...list,
+      tasks: sortedTasks,
+    };
+  });
 
   const selectedList = listsWithTasks.find(list => list.id === selectedListId) || null;
 
@@ -156,11 +167,17 @@ const Index = () => {
   };
 
   const handleAddTask = (taskName: string, listId: string) => {
+    const listTasks = allTasks.filter(t => t.listId === listId);
+    const maxOrder = listTasks.length > 0
+      ? Math.max(...listTasks.map(t => (t.order ?? 0)))
+      : -1;
+
     const newTask: Task = {
       id: Date.now().toString(),
       name: taskName,
       completed: false,
       listId,
+      order: maxOrder + 1,
     };
     
     setAllTasks(prevTasks => [...prevTasks, newTask]);
@@ -170,6 +187,20 @@ const Index = () => {
       description: taskName,
       duration: 2000,
     });
+  };
+
+  const handleReorderTasks = (listId: string, orderedIds: string[]) => {
+    setAllTasks(prev =>
+      prev.map(task => {
+        if (task.listId !== listId) return task;
+        const newIndex = orderedIds.indexOf(task.id);
+        if (newIndex !== -1) {
+          return { ...task, order: newIndex };
+        }
+        // Fallback: push any missing items to the end preserving rough relative order
+        return { ...task, order: orderedIds.length + (task.order ?? 0) };
+      })
+    );
   };
 
   // PWA Service Worker Registration
@@ -200,6 +231,7 @@ const Index = () => {
             lists={listsWithTasks}
             selectedListId={selectedListId}
             viewMode={viewMode}
+            settings={settings}
             onSelectList={handleSelectList}
             onViewAllLists={handleViewAllLists}
             onAddList={handleAddList}
@@ -220,6 +252,7 @@ const Index = () => {
             onEditList={handleEditList}
             onDeleteList={handleDeleteList}
             onOpenSettings={() => setSettingsOpen(true)}
+            onReorderTasks={handleReorderTasks}
           />
         </div>
       </SidebarProvider>

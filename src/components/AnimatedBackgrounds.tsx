@@ -42,9 +42,8 @@ export const AnimatedBackgrounds = ({
         </div>
       </div>
       
-      {/* Grass gradient */}
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-green-300 via-green-200 to-transparent opacity-80" />
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-green-400/60 to-transparent" />
+      {/* Grass gradient - blended */}
+      <div className="absolute bottom-0 left-0 w-full h-36 bg-gradient-to-t from-green-400/70 via-green-300/50 to-transparent" />
     </div>
   );
 
@@ -290,6 +289,40 @@ export const AnimatedBackgrounds = ({
       
       {/* Decorative elements */}
       <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-purple-400 text-lg animate-bounce" style={{ animationDelay: '2s' }}>✨</div>
+
+      {/* Large sleeping cat in corner */}
+      <div className="absolute bottom-6 right-6 md:right-10 md:bottom-10">
+        <div className="relative w-32 h-24 md:w-40 md:h-28">
+          {/* Body */}
+          <div className="absolute bottom-0 right-0 w-full h-full bg-white rounded-[2rem] border-2 border-gray-200/60 shadow-lg" />
+          {/* Head */}
+          <div className="absolute bottom-6 right-4 w-16 h-14 bg-white rounded-3xl border-2 border-gray-200/60 shadow">
+            {/* Ears */}
+            <div className="absolute -top-2 left-3 w-4 h-5 bg-white rounded-full border border-gray-200/60" />
+            <div className="absolute -top-2 right-3 w-4 h-5 bg-white rounded-full border border-gray-200/60" />
+            {/* Eyes closed */}
+            <div className="absolute top-6 left-4 w-4 h-1 bg-black/70 rounded-full" />
+            <div className="absolute top-6 right-4 w-4 h-1 bg-black/70 rounded-full" />
+            {/* Nose and smile */}
+            <div className="absolute top-8 left-1/2 -translate-x-1/2 w-2 h-2 bg-pink-400 rounded-full" />
+            <div className="absolute top-9 left-1/2 -translate-x-1/2 w-4 h-1 bg-pink-300 rounded-full" />
+          </div>
+          {/* Tail wag */}
+          {animationsEnabled && (
+            <div className="absolute -right-4 bottom-6 w-16 h-3 bg-white rounded-full border border-gray-200/60 origin-left animate-[wiggle_2.8s_ease-in-out_infinite]" />
+          )}
+          {/* Zzz */}
+          {animationsEnabled && (
+            <div className="absolute -top-2 right-2 text-purple-400/80 text-xl animate-fade-in">
+              z z z
+            </div>
+          )}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes wiggle { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } }
+      `}</style>
     </div>
   );
 

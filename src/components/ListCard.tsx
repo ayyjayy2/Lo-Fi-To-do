@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { List } from '@/types';
+import { List, Settings } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import { KawaiiDeleteDialog } from './KawaiiDeleteDialog';
 
 interface ListCardProps {
   list: List;
+  settings: Settings;
   onClick: () => void;
   onEditTitle: (newTitle: string) => void;
   onDelete: () => void;
@@ -64,7 +65,7 @@ export const ListCard = ({ list, onClick, onEditTitle, onDelete }: ListCardProps
             />
           </div>
           <Badge variant="secondary" className="text-xs">
-            {completedTasks}/{totalTasks}
+            {settings.taskCompletionStyle === 'hide' ? `${totalTasks - completedTasks}` : `${completedTasks}/${totalTasks}`}
           </Badge>
         </CardTitle>
       </CardHeader>

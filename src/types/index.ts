@@ -5,6 +5,7 @@ export interface Task {
   completed: boolean;
   dueDate?: Date;
   listId: string;
+  order?: number;
 }
 
 export interface List {

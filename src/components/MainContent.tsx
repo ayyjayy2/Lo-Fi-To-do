@@ -19,6 +19,7 @@ interface MainContentProps {
   onEditList: (listId: string, newName: string) => void;
   onDeleteList: (listId: string) => void;
   onOpenSettings: () => void;
+  onReorderTasks: (listId: string, orderedIds: string[]) => void;
 }
 
 export const MainContent = ({
@@ -34,6 +35,7 @@ export const MainContent = ({
   onEditList,
   onDeleteList,
   onOpenSettings,
+  onReorderTasks,
 }: MainContentProps) => {
   if (viewMode === 'all') {
     return (
@@ -58,6 +60,7 @@ export const MainContent = ({
             <ListCard
               key={list.id}
               list={list}
+              settings={settings}
               onClick={() => onSelectList(list.id)}
               onEditTitle={(newTitle) => onEditList(list.id, newTitle)}
               onDelete={() => onDeleteList(list.id)}
@@ -131,6 +134,7 @@ export const MainContent = ({
         onDeleteTask={onDeleteTask}
         onEditTask={onEditTask}
         onAddTask={(taskName) => onAddTask(taskName, selectedList.id)}
+        onReorder={(orderedIds) => onReorderTasks(selectedList.id, orderedIds)}
       />
     </div>
   );

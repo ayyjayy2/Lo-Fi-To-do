@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Task, Settings } from '@/types';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
-import { Trash2, Edit3 } from 'lucide-react';
+import { Trash2, Edit3, GripVertical } from 'lucide-react';
 
 interface TaskItemProps {
   task: Task;
@@ -10,6 +10,7 @@ interface TaskItemProps {
   onToggle: (taskId: string) => void;
   onDelete: (taskId: string) => void;
   onEdit: (taskId: string, newName: string) => void;
+  dragHandle?: { attributes: any; listeners: any };
 }
 
 export const TaskItem = ({ task, settings, onToggle, onDelete, onEdit }: TaskItemProps) => {
@@ -73,6 +74,19 @@ export const TaskItem = ({ task, settings, onToggle, onDelete, onEdit }: TaskIte
       )}
 
       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        {/* Drag handle */}
+        {dragHandle && (
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-label="Reorder task"
+            className="h-8 w-8 p-0 cursor-grab active:cursor-grabbing hover:bg-muted"
+            {...dragHandle.attributes}
+            {...dragHandle.listeners}
+          >
+            <GripVertical className="h-3 w-3" />
+          </Button>
+        )}
         <Button
           variant="ghost"
           size="sm"

@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { List, ViewMode } from '@/types';
+import { List, ViewMode, Settings } from '@/types';
 import {
   Sidebar,
   SidebarContent,
@@ -22,6 +22,7 @@ interface AppSidebarProps {
   lists: List[];
   selectedListId: string | null;
   viewMode: ViewMode;
+  settings: Settings;
   onSelectList: (listId: string) => void;
   onViewAllLists: () => void;
   onAddList: (name: string) => void;
@@ -119,7 +120,9 @@ export const AppSidebar = ({
                             className="truncate font-medium text-left"
                           />
                           <span className="text-xs text-muted-foreground">
-                            {completedTasks}/{totalTasks} tasks
+                            {settings.taskCompletionStyle === 'hide'
+                              ? `${totalTasks - completedTasks}`
+                              : `${completedTasks}/${totalTasks}`} 
                           </span>
                         </div>
                       )}
