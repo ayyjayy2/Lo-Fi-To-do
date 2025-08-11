@@ -13,7 +13,7 @@ interface TaskItemProps {
   dragHandle?: { attributes: any; listeners: any };
 }
 
-export const TaskItem = ({ task, settings, onToggle, onDelete, onEdit }: TaskItemProps) => {
+export const TaskItem = ({ task, settings, onToggle, onDelete, onEdit, dragHandle }: TaskItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(task.name);
 

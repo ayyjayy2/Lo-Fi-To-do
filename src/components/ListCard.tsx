@@ -16,7 +16,7 @@ interface ListCardProps {
   onDelete: () => void;
 }
 
-export const ListCard = ({ list, onClick, onEditTitle, onDelete }: ListCardProps) => {
+export const ListCard = ({ list, settings, onClick, onEditTitle, onDelete }: ListCardProps) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const completedTasks = list.tasks.filter(task => task.completed).length;
   const totalTasks = list.tasks.length;

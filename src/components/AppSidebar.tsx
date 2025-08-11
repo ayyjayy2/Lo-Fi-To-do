@@ -34,6 +34,7 @@ export const AppSidebar = ({
   lists,
   selectedListId,
   viewMode,
+  settings,
   onSelectList,
   onViewAllLists,
   onAddList,
