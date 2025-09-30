@@ -1,6 +1,7 @@
-# Welcome to your Lovable project
 
-## Project info
+<img width="931" height="700" alt="Screenshot 2025-09-30 at 5 47 04 PM" src="https://github.com/user-attachments/assets/5553188a-9e15-4c9c-b83c-421788f7fcc8" /><img width="931" height="700" alt="Screenshot 2025-09-30 at 5 47 40 PM" src="https://github.com/user-attachments/assets/51dfd98e-28fb-407f-a12b-a80fb103c4b7" />
+
+
 
 **URL**: https://lovable.dev/projects/172d28cc-af0f-4578-9566-072affa1ffff
 
