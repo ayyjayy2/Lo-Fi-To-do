@@ -168,9 +168,13 @@ const Index = () => {
 
   const handleAddTask = (taskName: string, listId: string) => {
     const listTasks = allTasks.filter(t => t.listId === listId);
-    const maxOrder = listTasks.length > 0
-      ? Math.max(...listTasks.map(t => (t.order ?? 0)))
-      : -1;
+    
+    // Get the maximum order value, ensuring we handle undefined orders correctly
+    let maxOrder = -1;
+    if (listTasks.length > 0) {
+      const orders = listTasks.map(t => t.order ?? -1).filter(o => o >= 0);
+      maxOrder = orders.length > 0 ? Math.max(...orders) : listTasks.length - 1;
+    }
 
     const newTask: Task = {
       id: Date.now().toString(),
