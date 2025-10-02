@@ -129,7 +129,7 @@ export const AnimatedBackgrounds = ({
           style={{
             left: `${Math.random() * 100}%`,
             top: `-${Math.random() * 20}px`,
-            animation: `slideDown ${2.5 + Math.random() * 1.5}s linear infinite`,
+            animation: `slideDown ${12.5 + Math.random() * 7.5}s linear infinite`,
             animationDelay: `${Math.random() * 3}s`,
           }}
         />
@@ -342,7 +342,7 @@ export const AnimatedBackgrounds = ({
           style={{
             left: `${Math.random() * 100}%`,
             top: `-${Math.random() * 20}px`,
-            animation: `slideDown ${3 + Math.random() * 2}s linear infinite`,
+            animation: `slideDown ${15 + Math.random() * 10}s linear infinite`,
             animationDelay: `${Math.random() * 3}s`,
           }}
         >
@@ -403,7 +403,7 @@ export const AnimatedBackgrounds = ({
           style={{
             left: `${Math.random() * 100}%`,
             top: `-${Math.random() * 20}px`,
-            animation: `slideDown ${2.5 + Math.random() * 2}s linear infinite`,
+            animation: `slideDown ${12.5 + Math.random() * 10}s linear infinite`,
             animationDelay: `${Math.random() * 2}s`,
           }}
         >
@@ -425,7 +425,7 @@ export const AnimatedBackgrounds = ({
           style={{
             left: `${Math.random() * 100}%`,
             top: `-${Math.random() * 20}px`,
-            animation: `slideDown ${4 + Math.random() * 3}s linear infinite`,
+            animation: `slideDown ${20 + Math.random() * 15}s linear infinite`,
             animationDelay: `${Math.random() * 4}s`,
           }}
         >
@@ -513,7 +513,7 @@ export const AnimatedBackgrounds = ({
           style={{
             left: `${Math.random() * 100}%`,
             top: `-${Math.random() * 20}px`,
-            animation: `slideDown ${5 + Math.random() * 3}s linear infinite`,
+            animation: `slideDown ${25 + Math.random() * 15}s linear infinite`,
             animationDelay: `${Math.random() * 3}s`,
           }}
         >
@@ -564,7 +564,7 @@ export const AnimatedBackgrounds = ({
           style={{
             left: `${Math.random() * 100}%`,
             top: `-${Math.random() * 20}px`,
-            animation: `slideDown ${5 + Math.random() * 3}s linear infinite`,
+            animation: `slideDown ${25 + Math.random() * 15}s linear infinite`,
             animationDelay: `${Math.random() * 4}s`,
           }}
         >
@@ -622,7 +622,7 @@ export const AnimatedBackgrounds = ({
           style={{
             left: `${Math.random() * 100}%`,
             top: `-${Math.random() * 20}px`,
-            animation: `slideDown ${4 + Math.random() * 2}s linear infinite`,
+            animation: `slideDown ${20 + Math.random() * 10}s linear infinite`,
             animationDelay: `${Math.random() * 3}s`,
           }}
         >
