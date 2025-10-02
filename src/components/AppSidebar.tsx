@@ -30,23 +30,23 @@ interface AppSidebarProps {
   onDeleteList: (listId: string) => void;
 }
 
-// Map themes to their sidebar background colors
-const getSidebarThemeClass = (theme: string): string => {
-  const themeMap: Record<string, string> = {
-    'day': 'bg-[hsl(var(--sidebar-day))] text-gray-800',
-    'night': 'bg-[hsl(var(--sidebar-night))] text-gray-100',
-    'raining': 'bg-[hsl(var(--sidebar-raining))] text-white',
-    'cats': 'bg-[hsl(var(--sidebar-cats))] text-gray-900',
-    'autumn': 'bg-[hsl(var(--sidebar-autumn))] text-gray-900',
-    'autumn-cozy': 'bg-[hsl(var(--sidebar-autumn-cozy))] text-white',
-    'autumn-forest': 'bg-[hsl(var(--sidebar-autumn-forest))] text-white',
-    'autumn-harvest': 'bg-[hsl(var(--sidebar-autumn-harvest))] text-gray-900',
-    'winter': 'bg-[hsl(var(--sidebar-winter))] text-gray-800',
-    'spring': 'bg-[hsl(var(--sidebar-spring))] text-gray-800',
-    'summer-beach': 'bg-[hsl(var(--sidebar-summer-beach))] text-gray-900',
-    'summer-garden': 'bg-[hsl(var(--sidebar-summer-garden))] text-white',
+// Map themes to their sidebar background and text colors
+const getSidebarThemeStyles = (theme: string): { bg: string; text: string } => {
+  const themeMap: Record<string, { bg: string; text: string }> = {
+    'day': { bg: 'hsl(200, 60%, 75%)', text: 'rgb(31, 41, 55)' },
+    'night': { bg: 'hsl(250, 50%, 15%)', text: 'rgb(243, 244, 246)' },
+    'raining': { bg: 'hsl(210, 40%, 50%)', text: 'rgb(255, 255, 255)' },
+    'cats': { bg: 'hsl(280, 25%, 70%)', text: 'rgb(17, 24, 39)' },
+    'autumn': { bg: 'hsl(30, 50%, 60%)', text: 'rgb(17, 24, 39)' },
+    'autumn-cozy': { bg: 'hsl(25, 55%, 55%)', text: 'rgb(255, 255, 255)' },
+    'autumn-forest': { bg: 'hsl(35, 45%, 50%)', text: 'rgb(255, 255, 255)' },
+    'autumn-harvest': { bg: 'hsl(35, 45%, 60%)', text: 'rgb(17, 24, 39)' },
+    'winter': { bg: 'hsl(200, 40%, 80%)', text: 'rgb(31, 41, 55)' },
+    'spring': { bg: 'hsl(160, 40%, 70%)', text: 'rgb(31, 41, 55)' },
+    'summer-beach': { bg: 'hsl(190, 50%, 65%)', text: 'rgb(17, 24, 39)' },
+    'summer-garden': { bg: 'hsl(140, 45%, 55%)', text: 'rgb(255, 255, 255)' },
   };
-  return themeMap[theme] || 'bg-card/60 text-foreground';
+  return themeMap[theme] || { bg: 'hsl(0, 0%, 98%)', text: 'hsl(0, 0%, 31%)' };
 };
 
 export const AppSidebar = ({
@@ -94,11 +94,23 @@ export const AppSidebar = ({
     setDeleteDialog({open: false, listId: '', listName: ''});
   };
 
-  const sidebarThemeClasses = getSidebarThemeClass(settings.backgroundScene);
+  const themeStyles = getSidebarThemeStyles(settings.backgroundScene);
   
   return (
-    <Sidebar className={`${collapsed ? 'w-14' : 'w-64'} ${sidebarThemeClasses} backdrop-blur-md border-border/50 transition-colors duration-500`}>
-      <SidebarContent>
+    <Sidebar 
+      className={`${collapsed ? 'w-14' : 'w-64'} border-border/50 transition-all duration-500 [&_[data-sidebar="sidebar"]]:!bg-transparent [&_[data-sidebar="sidebar"]]:backdrop-blur-md`}
+      style={{ 
+        '--sidebar-bg': themeStyles.bg,
+        '--sidebar-text': themeStyles.text,
+      } as React.CSSProperties}
+    >
+      <SidebarContent 
+        className="transition-colors duration-500"
+        style={{
+          backgroundColor: themeStyles.bg,
+          color: themeStyles.text,
+        }}
+      >
         {/* App branding */}
         <div className="p-4 border-b border-border/50">
           <div className="flex items-center gap-2">
