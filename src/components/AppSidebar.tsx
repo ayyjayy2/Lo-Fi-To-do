@@ -30,6 +30,25 @@ interface AppSidebarProps {
   onDeleteList: (listId: string) => void;
 }
 
+// Map themes to their sidebar background colors
+const getSidebarThemeClass = (theme: string): string => {
+  const themeMap: Record<string, string> = {
+    'day': 'bg-[hsl(var(--sidebar-day))] text-gray-800',
+    'night': 'bg-[hsl(var(--sidebar-night))] text-gray-100',
+    'raining': 'bg-[hsl(var(--sidebar-raining))] text-white',
+    'cats': 'bg-[hsl(var(--sidebar-cats))] text-gray-900',
+    'autumn': 'bg-[hsl(var(--sidebar-autumn))] text-gray-900',
+    'autumn-cozy': 'bg-[hsl(var(--sidebar-autumn-cozy))] text-white',
+    'autumn-forest': 'bg-[hsl(var(--sidebar-autumn-forest))] text-white',
+    'autumn-harvest': 'bg-[hsl(var(--sidebar-autumn-harvest))] text-gray-900',
+    'winter': 'bg-[hsl(var(--sidebar-winter))] text-gray-800',
+    'spring': 'bg-[hsl(var(--sidebar-spring))] text-gray-800',
+    'summer-beach': 'bg-[hsl(var(--sidebar-summer-beach))] text-gray-900',
+    'summer-garden': 'bg-[hsl(var(--sidebar-summer-garden))] text-white',
+  };
+  return themeMap[theme] || 'bg-card/60 text-foreground';
+};
+
 export const AppSidebar = ({
   lists,
   selectedListId,
@@ -75,8 +94,10 @@ export const AppSidebar = ({
     setDeleteDialog({open: false, listId: '', listName: ''});
   };
 
+  const sidebarThemeClasses = getSidebarThemeClass(settings.backgroundScene);
+  
   return (
-    <Sidebar className={`${collapsed ? 'w-14' : 'w-64'} bg-card/60 backdrop-blur-md border-border/50`}>
+    <Sidebar className={`${collapsed ? 'w-14' : 'w-64'} ${sidebarThemeClasses} backdrop-blur-md border-border/50 transition-colors duration-500`}>
       <SidebarContent>
         {/* App branding */}
         <div className="p-4 border-b border-border/50">
@@ -85,13 +106,13 @@ export const AppSidebar = ({
               <Sparkles className="h-5 w-5 text-primary-foreground" />
             </div>
             {!collapsed && (
-              <span className="font-semibold text-foreground">Cloudlist</span>
+              <span className="font-semibold">Cloudlist</span>
             )}
           </div>
         </div>
 
         <SidebarGroup>
-          <SidebarGroupLabel className="text-muted-foreground">
+          <SidebarGroupLabel className="opacity-70">
             {collapsed ? '' : 'Your Lists'}
           </SidebarGroupLabel>
           
@@ -120,7 +141,7 @@ export const AppSidebar = ({
                             onSave={(newName) => onEditList(list.id, newName)}
                             className="truncate font-medium text-left"
                           />
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-xs opacity-70">
                             {settings.taskCompletionStyle === 'hide'
                               ? `${totalTasks - completedTasks}`
                               : `${completedTasks}/${totalTasks}`} 

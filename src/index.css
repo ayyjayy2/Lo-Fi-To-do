@@ -74,6 +74,20 @@ All colors MUST be HSL.
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
+    /* Theme-specific sidebar backgrounds (darker than main bg, readable text) */
+    --sidebar-day: 200 60% 75%;
+    --sidebar-night: 250 50% 15%;
+    --sidebar-raining: 210 40% 50%;
+    --sidebar-cats: 280 25% 70%;
+    --sidebar-autumn: 30 50% 60%;
+    --sidebar-autumn-cozy: 25 55% 55%;
+    --sidebar-autumn-forest: 35 45% 50%;
+    --sidebar-autumn-harvest: 35 45% 60%;
+    --sidebar-winter: 200 40% 80%;
+    --sidebar-spring: 160 40% 70%;
+    --sidebar-summer-beach: 190 50% 65%;
+    --sidebar-summer-garden: 140 45% 55%;
+
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
