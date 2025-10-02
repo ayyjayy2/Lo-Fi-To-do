@@ -69,57 +69,25 @@ Simply open [Lovable](https://lovable.dev/projects/172d28cc-af0f-4578-9566-072af
 
 ### Deploy to GitHub Pages
 
-1. **Build your project:**
-   ```sh
-   npm run build
-   ```
-
-2. **Configure GitHub Pages:**
+1. **Verify repository settings:**
    - Go to your repository Settings → Pages
    - Under "Build and deployment", select "GitHub Actions" as the source
    
-3. **Create GitHub Actions workflow:**
-   Create `.github/workflows/deploy.yml` with:
-   ```yaml
-   name: Deploy to GitHub Pages
+2. **Push your code to GitHub** - The workflow will automatically:
+   - Build your app with the correct base path
+   - Deploy to GitHub Pages
+   
+3. **Your site will be live at:**
+   - `https://your-username.github.io/your-repo-name/`
+   
+**For custom domains:**
+- If using a custom domain, set `VITE_BASE_PATH: '/'` in the workflow file
+- Configure your custom domain in repository Settings → Pages → Custom domain
 
-   on:
-     push:
-       branches: ['main']
-     workflow_dispatch:
-
-   permissions:
-     contents: read
-     pages: write
-     id-token: write
-
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v4
-         - uses: actions/setup-node@v4
-           with:
-             node-version: 20
-             cache: 'npm'
-         - run: npm ci
-         - run: npm run build
-         - uses: actions/upload-pages-artifact@v3
-           with:
-             path: ./dist
-
-     deploy:
-       needs: build
-       runs-on: ubuntu-latest
-       environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-       steps:
-         - uses: actions/deploy-pages@v4
-           id: deployment
-   ```
-
-4. **Push to GitHub** - Your site will automatically deploy!
+**Troubleshooting:**
+- Check the Actions tab for build logs
+- Ensure GitHub Pages is enabled in repository settings
+- Wait 2-3 minutes after the workflow completes for DNS propagation
 
 ## Can I connect a custom domain to my Lovable project?
 
