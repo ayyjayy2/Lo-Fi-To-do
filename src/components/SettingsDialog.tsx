@@ -29,6 +29,7 @@ export const SettingsDialog = ({
   const [showMoreThemes, setShowMoreThemes] = React.useState(false);
   
   const backgroundOptions = [
+    { id: 'theme-by-title', name: 'Theme by Title', preview: '✨' },
     { id: 'day', name: 'Sunny Day', preview: '☀️' },
     { id: 'night', name: 'Starry Night', preview: '🌙' },
     { id: 'raining', name: 'Gentle Rain', preview: '🌧️' },

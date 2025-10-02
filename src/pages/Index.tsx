@@ -223,6 +223,7 @@ const Index = () => {
       <AnimatedBackground 
         scene={settings.backgroundScene}
         animationsEnabled={settings.animationsEnabled}
+        listName={selectedList?.name}
       />
       
       <SidebarProvider defaultOpen={true}>
