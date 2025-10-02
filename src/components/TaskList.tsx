@@ -18,6 +18,41 @@ interface TaskListProps {
   onReorder: (orderedIds: string[]) => void;
 }
 
+// Move SortableTask outside to prevent recreation on each render
+const SortableTask = ({ 
+  task, 
+  settings, 
+  onToggleTask, 
+  onDeleteTask, 
+  onEditTask 
+}: { 
+  task: Task; 
+  settings: Settings; 
+  onToggleTask: (taskId: string) => void;
+  onDeleteTask: (taskId: string) => void;
+  onEditTask: (taskId: string, newName: string) => void;
+}) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.6 : 1,
+  } as React.CSSProperties;
+
+  return (
+    <div ref={setNodeRef} style={style}>
+      <TaskItem
+        task={task}
+        settings={settings}
+        onToggle={onToggleTask}
+        onDelete={onDeleteTask}
+        onEdit={onEditTask}
+        dragHandle={{ attributes, listeners }}
+      />
+    </div>
+  );
+};
+
 export const TaskList = ({
   tasks,
   settings,
@@ -51,28 +86,6 @@ export const TaskList = ({
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     useSensor(KeyboardSensor)
   );
-
-  const SortableTask = ({ task }: { task: Task }) => {
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.id });
-    const style = {
-      transform: CSS.Transform.toString(transform),
-      transition,
-      opacity: isDragging ? 0.6 : 1,
-    } as React.CSSProperties;
-
-    return (
-      <div ref={setNodeRef} style={style}>
-        <TaskItem
-          task={task}
-          settings={settings}
-          onToggle={onToggleTask}
-          onDelete={onDeleteTask}
-          onEdit={onEditTask}
-          dragHandle={{ attributes, listeners }}
-        />
-      </div>
-    );
-  };
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
@@ -91,7 +104,14 @@ export const TaskList = ({
         <SortableContext items={visibleTasks.map((t) => t.id)} strategy={verticalListSortingStrategy}>
           <div className="space-y-2">
             {visibleTasks.map((task) => (
-              <SortableTask key={task.id} task={task} />
+              <SortableTask 
+                key={task.id} 
+                task={task}
+                settings={settings}
+                onToggleTask={onToggleTask}
+                onDeleteTask={onDeleteTask}
+                onEditTask={onEditTask}
+              />
             ))}
 
             {visibleTasks.length === 0 && (

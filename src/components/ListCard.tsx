@@ -19,12 +19,14 @@ interface ListCardProps {
 export const ListCard = ({ list, settings, onClick, onEditTitle, onDelete }: ListCardProps) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   
-  // Filter tasks based on settings
+  // Filter tasks based on settings for display only
   const visibleTasks = settings.taskCompletionStyle === 'hide' 
     ? list.tasks.filter(task => !task.completed)
     : list.tasks;
   
+  // Progress bar always shows actual completion (not affected by hide setting)
   const completedTasks = list.tasks.filter(task => task.completed).length;
+  const activeTasks = list.tasks.filter(task => !task.completed).length;
   const totalTasks = list.tasks.length;
   const completionPercent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
@@ -71,7 +73,7 @@ export const ListCard = ({ list, settings, onClick, onEditTitle, onDelete }: Lis
             />
           </div>
           <Badge variant="secondary" className="text-xs">
-            {settings.taskCompletionStyle === 'hide' ? `${visibleTasks.length}` : `${completedTasks}/${totalTasks}`}
+            {settings.taskCompletionStyle === 'hide' ? `${activeTasks}` : `${completedTasks}/${totalTasks}`}
           </Badge>
         </CardTitle>
       </CardHeader>
