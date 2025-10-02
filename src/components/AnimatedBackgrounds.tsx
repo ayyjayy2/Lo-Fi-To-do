@@ -326,11 +326,212 @@ export const AnimatedBackgrounds = ({
     </div>
   );
 
+  const renderAutumnScene = () => (
+    <div className="absolute inset-0 bg-gradient-to-b from-orange-200 via-amber-100 to-yellow-100">
+      {/* Sun with autumn glow */}
+      <div className="absolute top-10 right-20 w-14 h-14 bg-orange-300 rounded-full shadow-lg relative">
+        <div className="absolute inset-0 bg-orange-200 rounded-full blur-md opacity-60" />
+      </div>
+      
+      {/* Falling leaves */}
+      {animationsEnabled && [...Array(20)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute text-2xl"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `-${Math.random() * 20}px`,
+            animation: `slideDown ${3 + Math.random() * 2}s linear infinite`,
+            animationDelay: `${Math.random() * 3}s`,
+          }}
+        >
+          {['🍂', '🍁', '🍃'][Math.floor(Math.random() * 3)]}
+        </div>
+      ))}
+      
+      {/* Trees */}
+      <div className="absolute bottom-12 left-16 w-12 h-16 bg-amber-800 rounded-t-full">
+        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-orange-400 rounded-full" />
+        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-red-400 rounded-full" />
+      </div>
+      <div className="absolute bottom-12 right-24 w-10 h-14 bg-amber-900 rounded-t-full">
+        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-14 h-14 bg-yellow-500 rounded-full" />
+        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-orange-500 rounded-full" />
+      </div>
+      
+      {/* Ground with autumn colors */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-amber-600/40 via-orange-300/30 to-transparent" />
+    </div>
+  );
+
+  const renderAutumnCozyScene = () => (
+    <div className="absolute inset-0 bg-gradient-to-b from-orange-300 via-red-200 to-amber-200">
+      {/* Pumpkins */}
+      <div className="absolute bottom-16 left-20 w-12 h-10 bg-orange-500 rounded-full relative border-2 border-orange-600">
+        <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-2 h-3 bg-green-600 rounded-t-lg" />
+        <div className="absolute top-2 left-3 w-2 h-2 bg-black rounded-full" />
+        <div className="absolute top-2 right-3 w-2 h-2 bg-black rounded-full" />
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-2 bg-black rounded-full" />
+      </div>
+      
+      <div className="absolute bottom-12 left-36 w-8 h-7 bg-orange-400 rounded-full border-2 border-orange-500">
+        <div className="absolute -top-1.5 left-1/2 transform -translate-x-1/2 w-1.5 h-2 bg-green-600 rounded-t-lg" />
+      </div>
+      
+      {/* Scarecrow */}
+      <div className="absolute bottom-20 right-32">
+        <div className="w-2 h-16 bg-amber-800" />
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-amber-800" />
+        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-orange-200 rounded-full border-2 border-orange-300">
+          <div className="absolute top-1.5 left-1.5 w-1 h-1 bg-black rounded-full" />
+          <div className="absolute top-1.5 right-1.5 w-1 h-1 bg-black rounded-full" />
+          <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-0.5 bg-black" />
+        </div>
+        <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-3 bg-amber-700 rounded-t-full" />
+      </div>
+      
+      {/* Hay bales */}
+      <div className="absolute bottom-8 left-1/3 w-10 h-6 bg-yellow-600 rounded-lg border-2 border-yellow-700" />
+      <div className="absolute bottom-8 left-1/3 ml-12 w-10 h-6 bg-yellow-600 rounded-lg border-2 border-yellow-700" />
+      
+      {/* Falling leaves */}
+      {animationsEnabled && [...Array(15)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute text-xl"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `-${Math.random() * 20}px`,
+            animation: `slideDown ${2.5 + Math.random() * 2}s linear infinite`,
+            animationDelay: `${Math.random() * 2}s`,
+          }}
+        >
+          {['🍂', '🍁'][Math.floor(Math.random() * 2)]}
+        </div>
+      ))}
+      
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-amber-700/50 via-orange-400/30 to-transparent" />
+    </div>
+  );
+
+  const renderWinterScene = () => (
+    <div className="absolute inset-0 bg-gradient-to-b from-blue-100 via-cyan-50 to-white">
+      {/* Snowflakes */}
+      {animationsEnabled && [...Array(30)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute text-white text-xl"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `-${Math.random() * 20}px`,
+            animation: `slideDown ${4 + Math.random() * 3}s linear infinite`,
+            animationDelay: `${Math.random() * 4}s`,
+          }}
+        >
+          ❄️
+        </div>
+      ))}
+      
+      {/* Snowman */}
+      <div className="absolute bottom-16 left-1/4">
+        {/* Base */}
+        <div className="w-16 h-16 bg-white rounded-full border-2 border-blue-100 relative shadow-lg" />
+        {/* Middle */}
+        <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-white rounded-full border-2 border-blue-100 shadow-lg" />
+        {/* Head */}
+        <div className="absolute -top-18 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-white rounded-full border-2 border-blue-100 shadow-lg">
+          <div className="absolute top-2 left-1.5 w-1 h-1 bg-black rounded-full" />
+          <div className="absolute top-2 right-1.5 w-1 h-1 bg-black rounded-full" />
+          <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-1 bg-orange-500" />
+        </div>
+        {/* Hat */}
+        <div className="absolute -top-22 left-1/2 transform -translate-x-1/2 w-6 h-3 bg-black rounded-t-lg" />
+        <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-black" />
+      </div>
+      
+      {/* Pine trees */}
+      <div className="absolute bottom-12 right-24">
+        <div className="w-0 h-0 border-l-[12px] border-r-[12px] border-b-[16px] border-transparent border-b-green-700" />
+        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[10px] border-r-[10px] border-b-[14px] border-transparent border-b-green-700" />
+        <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-b-[12px] border-transparent border-b-green-700" />
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-4 bg-amber-800" />
+      </div>
+      
+      <div className="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-t from-white via-blue-50/50 to-transparent" />
+    </div>
+  );
+
+  const renderSpringScene = () => (
+    <div className="absolute inset-0 bg-gradient-to-b from-sky-200 via-pink-100 to-green-100">
+      {/* Sun */}
+      <div className="absolute top-8 right-16 w-14 h-14 bg-yellow-300 rounded-full shadow-lg animate-pulse" />
+      
+      {/* Cherry blossom trees */}
+      <div className="absolute bottom-12 left-16 w-8 h-20 bg-amber-900 rounded-t-full">
+        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-20 h-16 bg-pink-300/80 rounded-full" />
+        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-16 h-12 bg-pink-400/70 rounded-full" />
+      </div>
+      
+      {/* Flowers */}
+      {[...Array(8)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute bottom-8"
+          style={{
+            left: `${20 + i * 10}%`,
+          }}
+        >
+          <div className="w-1 h-4 bg-green-500" />
+          <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-pink-400 rounded-full" />
+          <div className="absolute -top-1.5 left-0 w-2 h-2 bg-pink-300 rounded-full" />
+          <div className="absolute -top-1.5 right-0 w-2 h-2 bg-pink-300 rounded-full" />
+        </div>
+      ))}
+      
+      {/* Butterflies */}
+      {animationsEnabled && [...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute text-xl animate-float"
+          style={{
+            top: `${20 + Math.random() * 50}%`,
+            left: `${20 + Math.random() * 60}%`,
+            animationDelay: `${Math.random() * 2}s`,
+          }}
+        >
+          🦋
+        </div>
+      ))}
+      
+      {/* Petals falling */}
+      {animationsEnabled && [...Array(10)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute text-pink-400 text-lg"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `-${Math.random() * 20}px`,
+            animation: `slideDown ${3 + Math.random() * 2}s linear infinite`,
+            animationDelay: `${Math.random() * 2}s`,
+          }}
+        >
+          🌸
+        </div>
+      ))}
+      
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-green-400/50 via-green-300/30 to-transparent" />
+    </div>
+  );
+
   const scenes = {
     day: renderDayScene,
     night: renderNightScene,
     raining: renderRainyScene,
     cats: renderCatsScene,
+    autumn: renderAutumnScene,
+    'autumn-cozy': renderAutumnCozyScene,
+    winter: renderWinterScene,
+    spring: renderSpringScene,
   };
 
   return (

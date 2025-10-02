@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Settings } from '@/types';
 import {
   Dialog,
@@ -25,11 +26,20 @@ export const SettingsDialog = ({
   settings,
   onSettingsChange,
 }: SettingsDialogProps) => {
+  const [showMoreThemes, setShowMoreThemes] = React.useState(false);
+  
   const backgroundOptions = [
     { id: 'day', name: 'Sunny Day', preview: '☀️' },
     { id: 'night', name: 'Starry Night', preview: '🌙' },
     { id: 'raining', name: 'Gentle Rain', preview: '🌧️' },
     { id: 'cats', name: 'Kawaii Cats', preview: '🐱' },
+  ];
+
+  const seasonalOptions = [
+    { id: 'autumn', name: 'Autumn Leaves', preview: '🍂' },
+    { id: 'autumn-cozy', name: 'Autumn Cozy', preview: '🎃' },
+    { id: 'winter', name: 'Winter Snow', preview: '❄️' },
+    { id: 'spring', name: 'Spring Bloom', preview: '🌸' },
   ];
 
   return (
@@ -66,6 +76,38 @@ export const SettingsDialog = ({
                 </Card>
               ))}
             </div>
+            
+            {/* More themes toggle */}
+            <button
+              onClick={() => setShowMoreThemes(!showMoreThemes)}
+              className="text-sm text-primary hover:underline cursor-pointer mt-2"
+            >
+              {showMoreThemes ? '- Show less themes' : '+ More themes'}
+            </button>
+            
+            {/* Seasonal themes */}
+            {showMoreThemes && (
+              <div className="grid grid-cols-2 gap-2 mt-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                {seasonalOptions.map((option) => (
+                  <Card
+                    key={option.id}
+                    className={`cursor-pointer transition-all duration-200 hover:scale-105 ${
+                      settings.backgroundScene === option.id
+                        ? 'ring-2 ring-primary bg-primary/5'
+                        : 'hover:bg-muted/50'
+                    }`}
+                    onClick={() =>
+                      onSettingsChange({ ...settings, backgroundScene: option.id })
+                    }
+                  >
+                    <CardContent className="p-3 text-center">
+                      <div className="text-2xl mb-1">{option.preview}</div>
+                      <div className="text-xs font-medium">{option.name}</div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Task Completion Style */}
