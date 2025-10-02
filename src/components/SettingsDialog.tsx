@@ -38,8 +38,12 @@ export const SettingsDialog = ({
   const seasonalOptions = [
     { id: 'autumn', name: 'Autumn Leaves', preview: '🍂' },
     { id: 'autumn-cozy', name: 'Autumn Cozy', preview: '🎃' },
+    { id: 'autumn-forest', name: 'Autumn Forest', preview: '🍄' },
+    { id: 'autumn-harvest', name: 'Harvest Time', preview: '🌽' },
     { id: 'winter', name: 'Winter Snow', preview: '❄️' },
     { id: 'spring', name: 'Spring Bloom', preview: '🌸' },
+    { id: 'summer-beach', name: 'Summer Beach', preview: '🏖️' },
+    { id: 'summer-garden', name: 'Summer Garden', preview: '🌻' },
   ];
 
   return (
