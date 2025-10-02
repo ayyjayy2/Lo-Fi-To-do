@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting…</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <script>
+      // Redirect GitHub Pages 404s back to the repo base path
+      (function() {
+        var segs = window.location.pathname.split('/');
+        var repo = segs[1] || '';
+        if (repo) {
+          var base = '/' + repo + '/';
+          // Preserve query and hash if present
+          var target = base;
+          window.location.replace(target);
+        } else {
+          window.location.replace('/');
+        }
+      })();
+    </script>
+  </body>
+</html>
