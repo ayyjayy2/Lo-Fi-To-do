@@ -29,7 +29,6 @@ export const SettingsDialog = ({
   const [showMoreThemes, setShowMoreThemes] = React.useState(false);
   
   const backgroundOptions = [
-    { id: 'theme-by-title', name: 'Theme by Title', preview: '✨' },
     { id: 'day', name: 'Sunny Day', preview: '☀️' },
     { id: 'night', name: 'Starry Night', preview: '🌙' },
     { id: 'raining', name: 'Gentle Rain', preview: '🌧️' },
@@ -49,7 +48,7 @@ export const SettingsDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-card/95 backdrop-blur-md border-border/50">
+      <DialogContent className="sm:max-w-md bg-card/95 backdrop-blur-md border-border/50 max-h-[90vh] flex flex-col">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Palette className="h-5 w-5" />
@@ -57,7 +56,7 @@ export const SettingsDialog = ({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-6 overflow-y-auto pr-2">{/* Scrollable content area */}
           {/* Background Scene */}
           <div className="space-y-3">
             <Label className="text-base font-medium">Background Scene</Label>
