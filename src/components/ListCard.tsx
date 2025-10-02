@@ -18,6 +18,12 @@ interface ListCardProps {
 
 export const ListCard = ({ list, settings, onClick, onEditTitle, onDelete }: ListCardProps) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  
+  // Filter tasks based on settings
+  const visibleTasks = settings.taskCompletionStyle === 'hide' 
+    ? list.tasks.filter(task => !task.completed)
+    : list.tasks;
+  
   const completedTasks = list.tasks.filter(task => task.completed).length;
   const totalTasks = list.tasks.length;
   const completionPercent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
@@ -65,7 +71,7 @@ export const ListCard = ({ list, settings, onClick, onEditTitle, onDelete }: Lis
             />
           </div>
           <Badge variant="secondary" className="text-xs">
-            {settings.taskCompletionStyle === 'hide' ? `${totalTasks - completedTasks}` : `${completedTasks}/${totalTasks}`}
+            {settings.taskCompletionStyle === 'hide' ? `${visibleTasks.length}` : `${completedTasks}/${totalTasks}`}
           </Badge>
         </CardTitle>
       </CardHeader>
@@ -81,7 +87,7 @@ export const ListCard = ({ list, settings, onClick, onEditTitle, onDelete }: Lis
         
         {/* Task preview */}
         <div className="space-y-1">
-          {list.tasks.slice(0, 3).map((task) => (
+          {visibleTasks.slice(0, 3).map((task) => (
             <div key={task.id} className="flex items-center gap-2 text-sm text-muted-foreground">
               {task.completed ? (
                 <CheckCircle className="h-3 w-3 text-primary" />
@@ -94,13 +100,13 @@ export const ListCard = ({ list, settings, onClick, onEditTitle, onDelete }: Lis
             </div>
           ))}
           
-          {list.tasks.length > 3 && (
+          {visibleTasks.length > 3 && (
             <p className="text-xs text-muted-foreground mt-2">
-              +{list.tasks.length - 3} more tasks
+              +{visibleTasks.length - 3} more tasks
             </p>
           )}
           
-          {list.tasks.length === 0 && (
+          {visibleTasks.length === 0 && (
             <p className="text-sm text-muted-foreground italic">No tasks yet</p>
           )}
         </div>

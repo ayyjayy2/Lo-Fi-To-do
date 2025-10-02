@@ -51,28 +51,6 @@ export const TaskList = ({
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     useSensor(KeyboardSensor)
   );
-
-  const SortableTask = ({ task }: { task: Task }) => {
-    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.id });
-    const style = {
-      transform: CSS.Transform.toString(transform),
-      transition,
-      opacity: isDragging ? 0.6 : 1,
-    } as React.CSSProperties;
-
-    return (
-      <div ref={setNodeRef} style={style}>
-        <TaskItem
-          task={task}
-          settings={settings}
-          onToggle={onToggleTask}
-          onDelete={onDeleteTask}
-          onEdit={onEditTask}
-          dragHandle={{ attributes, listeners }}
-        />
-      </div>
-    );
-  };
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
@@ -90,9 +68,27 @@ export const TaskList = ({
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={visibleTasks.map((t) => t.id)} strategy={verticalListSortingStrategy}>
           <div className="space-y-2">
-            {visibleTasks.map((task) => (
-              <SortableTask key={task.id} task={task} />
-            ))}
+            {visibleTasks.map((task) => {
+              const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.id });
+              const style = {
+                transform: CSS.Transform.toString(transform),
+                transition,
+                opacity: isDragging ? 0.6 : 1,
+              } as React.CSSProperties;
+
+              return (
+                <div key={task.id} ref={setNodeRef} style={style}>
+                  <TaskItem
+                    task={task}
+                    settings={settings}
+                    onToggle={onToggleTask}
+                    onDelete={onDeleteTask}
+                    onEdit={onEditTask}
+                    dragHandle={{ attributes, listeners }}
+                  />
+                </div>
+              );
+            })}
 
             {visibleTasks.length === 0 && (
               <div className="text-center py-8 text-muted-foreground">
